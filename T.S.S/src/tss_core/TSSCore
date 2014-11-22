@@ -1,1 +1,3 @@
 TSS core
+
+Added an array called courseregistered and a getter called getregisteredc to the student class
