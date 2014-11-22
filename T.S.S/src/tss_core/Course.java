@@ -12,6 +12,7 @@ public class Course
     private ArrayList <TimeSlot> timeslotlist = new ArrayList <TimeSlot> ();
     private ArrayList<Course> Clist = new ArrayList <Course> ();
     private String location;
+    private String type;
     
 
     /**
@@ -19,7 +20,7 @@ public class Course
      * Constructor for objects of class Course
      */
     
-    public Course(int CRN, String titl, String subject, String co, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String Location)
+    public Course(int CRN, String titl,String Type, String subject, String co, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String Location)
     {
         Crn = CRN;
         Subject = subject;
@@ -29,7 +30,7 @@ public class Course
         credit = credits;
         Clist = prereq;
         location = Location;
-        
+        type = Type;
         
         }
 
@@ -94,5 +95,9 @@ public ArrayList <TimeSlot> gettimeslot()
 	  return location;
 	  
   }
-
+ 
+  public String gettype(){
+	  return type;
+	  
+  }
 }
