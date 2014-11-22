@@ -7,18 +7,18 @@ public class Course
     private int Crn;
     private String title;
     private String Subject;
-    private int code;
+    private String code;
     private int credit;
     private ArrayList <TimeSlot> timeslotlist = new ArrayList <TimeSlot> ();
     private ArrayList<Course> Clist = new ArrayList <Course> ();
-    private String Faculty;
+    
 
     /**
      * @Authur Tevin Anderson 
      * Constructor for objects of class Course
      */
     
-    public Course(int CRN, String titl, String subject, int co, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String faculty )
+    public Course(int CRN, String titl, String subject, String co, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq)
     {
         Crn = CRN;
         Subject = subject;
@@ -27,7 +27,7 @@ public class Course
         timeslotlist = timeslot;
         credit = credits;
         Clist = prereq;
-        Faculty = faculty;
+        
         
         }
 
@@ -58,7 +58,7 @@ public class Course
     /**
      * @return the code  
      */
-    public int getCode()
+    public String getCode()
     {
         return code;
     }
@@ -88,11 +88,5 @@ public ArrayList <TimeSlot> gettimeslot()
         return Clist;
     }
     
-    /**
-     * @return the faculty the course is from  
-     */
-    public String getfaculty()
-    {
-        return Faculty;
-    }
+
 }
