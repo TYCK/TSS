@@ -1,4 +1,6 @@
-package tss_databaseCommunicator;
+package src.tss_databaseCommunicator;
+
+import src.tss_core.*;
 import java.util.*;
 import java.net.URL;
 
@@ -37,11 +39,11 @@ public class DatabaseInterface {
 	/*
 	 * Method to initialize connection to php scripts
 	 */
-	public int connect(){return arb_int;};
+	public int connect(){return 0;};
 	/*
 	 *  Method to disconnect connection from php scripts
 	 */
-	public int disconnect(){return arb_int;};
+	public int disconnect(){return 0;};
 	
 	/*
 	 * A method designed to identify if there is a valid connection to the php scripts.
@@ -55,23 +57,19 @@ public class DatabaseInterface {
 	/*
 	 * Registers a student with course information found in the given timetable
 	 */
-	public int registerStudent(Timetable time_tab){return arb_int;};
+	public int registerStudent(Timetable time_tab){return 0;};
 	
-	
-	public String decode(SASData sasha){return arb_str;};
 	
 	/*
-	 * Takes in message from the protocol and encrypts the message using CES
+	 * Converts the message into a format which can be understood by the DatabaseProtocol.
 	 */
-	public void encrypt(String message) {};
+	public String decode(SASData sasha){return "";};
+
 	/*
 	 * Converts the message into a format which can be uploaded back to the PHP scripts.
 	 */
 	public SASData encode(String message) {return sash;};
-	/*
-	 * Takes in message from the protocol and decrypts the message using CES
-	 */
-	public void decrypt(String message) {};
+
 	
 	/*
 	 * Takes many parameters (which will probably be included in class Course) and uses them to search database for course.
