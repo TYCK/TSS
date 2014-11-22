@@ -1,1 +1,24 @@
 database communicator
+
+All information which will be taken in, will be in the format of JSON format. This will take all the information into a class of 
+
+JSONObject, which is then easier to parse using the JSONParser.
+
+
+Therefore, the most important thing to code is the function which will be taking the information from the database. 
+
+
+Functions to be coded : 
+____________________________________________________________________________
+
+-GET-
+getStudent()
+getCourse()
+
+-GET-&-POST-
+editStudent()
+
+-POST-
+registerCourses()
+
+All of these methods will actually draw on information from the database.
