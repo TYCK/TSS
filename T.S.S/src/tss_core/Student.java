@@ -11,13 +11,15 @@ public class Student extends Person
     private ArrayList <String> coursespassed = new ArrayList <String> ();
     private boolean cleared;
     private int ID;
+    private ArrayList <Course> courseregistered = new ArrayList <String> ()
 
-    public Student(int id, String firstName, String lastName,ArrayList <String> coursePassed, boolean financiallycleared)
+    public Student(int id, String firstName, String lastName,ArrayList <String> coursePassed, boolean financiallycleared), ArrayList <Course> registeredCourses)
     {
     	super(firstName,lastName);
         ID = id;
         coursespassed = coursePassed;
         cleared = financiallycleared;
+        courseregistered = registeredCourses;
     }
 
     /**
@@ -49,4 +51,8 @@ public class Student extends Person
     {
         return ID;
     }
+    
+    public ArrayList <Course> getregisteredc(){
+         return courseregistered;
+    } 
 }
