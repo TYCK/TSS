@@ -10,25 +10,25 @@ public class Course
     private String code;
     private int credit;
     private ArrayList <TimeSlot> timeslotlist = new ArrayList <TimeSlot> ();
-    private ArrayList<Course> Clist = new ArrayList <Course> ();
+    private ArrayList<Course> prereqlist = new ArrayList <Course> ();
     private String location;
     private String type;
     
 
     /**
-     * @Authur Tevin Anderson 
+     * @Author Tevin Anderson 
      * Constructor for objects of class Course
      */
     
-    public Course(int CRN, String titl,String Type, String subject, String co, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String Location)
+    public Course(int CRN, String Title,String Type, String subject, String Code, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String Location)
     {
         Crn = CRN;
         Subject = subject;
-        title = titl;
-        code = co;
+        title = Title;
+        code = Code;
         timeslotlist = timeslot;
         credit = credits;
-        Clist = prereq;
+        prereqlist = prereq;
         location = Location;
         type = Type;
         
@@ -45,7 +45,7 @@ public class Course
     /**
      * @return  the title of the course 
      */
-    public String gettitle()
+    public String getTitle()
     {
         return title;
     }
@@ -53,7 +53,7 @@ public class Course
     /**
      * @return  the subject the course falls under 
      */
-    public String getsubject()
+    public String getSubject()
     {
       return Subject;
     }
@@ -70,7 +70,7 @@ public class Course
      * @return the time slots for the chosen course 
      */
 
-public ArrayList <TimeSlot> gettimeslot()
+public ArrayList <TimeSlot> getTimeslot()
     {
         return timeslotlist;
     }
@@ -86,9 +86,9 @@ public ArrayList <TimeSlot> gettimeslot()
     /**
      * @return the prerequisite courses of the desired course
      */
-  public ArrayList<Course> getprereq()
+  public ArrayList<Course> getPrereq()
     {
-        return Clist;
+        return prereqlist;
     }
     
   public String getLocation(){
@@ -96,7 +96,7 @@ public ArrayList <TimeSlot> gettimeslot()
 	  
   }
  
-  public String gettype(){
+  public String getType(){
 	  return type;
 	  
   }
