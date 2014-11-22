@@ -29,6 +29,16 @@ public class Timetable
 		return timeSlots;
 	}
 	
+	public int getStartHr()
+	{
+		return startHr;
+	}
+	
+	public int getEndHr()
+	{
+		return endHr;
+	}
+	
 	/**
 	 * 
 	 * @param timeSlot
@@ -43,7 +53,20 @@ public class Timetable
 		for(int i = 0; i < timeSlots[day].length;++i)
 			if(timeSlot.clashesWith(timeSlots[day][i]))
 				returnArray.add(timeSlots[day][i]);
-		if(returnArray == null)
+		if(returnArray.size() == 0 || forceOverwrite)
+		{
+			ArrayList<TimeSlot> slotsToAdd = timeSlot.split();
+			for(int i = 0; i < slotsToAdd.size();++i)
+			{
+				TimeSlot slotToAdd = slotsToAdd.get(i);
+				timeSlots[slotToAdd.getDay()][this.getStartHr()-slotToAdd.getBeginTime()] = slotToAdd;
+			}
+		}
+		if(returnArray.size() == 0)
+			return null;
+		else
+			return returnArray;
+			
 			
 				
 				

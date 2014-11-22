@@ -1,5 +1,7 @@
 package tss_core;
 
+import java.util.ArrayList;
+
 public class TimeSlot
 {
 	final public static int MONDAY = 0;
@@ -14,8 +16,12 @@ public class TimeSlot
 	private Course course;
 	private int day;
 	
-	public TimeSlot()
+	public TimeSlot(int beginTime, int endTime, Course course, int day)
 	{
+		this.beginTime = beginTime;
+		this.endTime = endTime;
+		this.course = course;
+		this.day = day;
 		
 	}
 	
@@ -30,6 +36,21 @@ public class TimeSlot
 			    (this.beginTime > timeSlot.endTime)));
 	}
 	
+	public int getBeginTime()
+	{
+		return beginTime;
+	}
+	
+	public int getEndTime()
+	{
+		return endTime;
+	}
+	
+	public Course getCourse()
+	{
+		return this.course;
+	}
+	
 	public int getDay()
 	{
 		return this.day;
@@ -42,7 +63,10 @@ public class TimeSlot
 	
 	public ArrayList<TimeSlot> split()
 	{
-		
+		ArrayList<TimeSlot> returnList = new ArrayList<TimeSlot>();
+		for(int i = this.beginTime; i < this.endTime; ++i)
+			returnList.add(new TimeSlot(i,i+1,this.getCourse(),this.getDay()));
+		return returnList;
 	}
 
 }
