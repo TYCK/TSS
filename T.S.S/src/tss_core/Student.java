@@ -13,7 +13,7 @@ public class Student extends Person
     private int ID;
     private ArrayList <Course> registeredcourses;
 
-    public Student(int id, String firstName, String lastName, ArrayList <String> coursesPassed, boolean financiallycleared), ArrayList <Course> registeredCourses)
+    public Student(int id, String firstName, String lastName, ArrayList <String> coursesPassed, boolean financiallycleared, ArrayList <Course> registeredCourses)
     {
     	super(firstName,lastName);
         ID = id;
