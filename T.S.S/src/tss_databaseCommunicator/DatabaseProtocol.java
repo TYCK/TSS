@@ -20,33 +20,16 @@ import tss_core.Timetable;
 public class DatabaseProtocol
 {
 
-	String SERVER_IP;
-	int SUCCESS;
-	boolean connected;
+	final private String SERVER_IP = "";
+	final int SUCCESS = 1;
+	private boolean connected;
 	URL USERINFO_URL;
 	// URL COURSEINFO_URL = new URL();
 	// URL REGISTER_URL = new URL();
-	URLConnection userInfo;
-	ArrayList<Course> Timetable = new ArrayList<Course>();
-	String address = "192.168.0.119";// The address of the wamp server
 
-	// Arbitrary Variables, used as placeholders
-	Student stud;
-	SASData sash;
-	Course difficult;
-
-	/*
-	 * Placeholder class to hold the information which the Php Data will send
-	 * regarding student course in a way that this interface can understand. :)
-	 */
-	abstract class SASData
-	{
-
-	}
 
 	public DatabaseProtocol()
 	{
-		SERVER_IP = "";
 	}
 
 	/*
@@ -54,20 +37,7 @@ public class DatabaseProtocol
 	 */
 	public int connect(String address)
 	{
-		try
-		{
-			USERINFO_URL = new URL(address);
-			userInfo = USERINFO_URL.openConnection();
-			return 0;
-		} catch (MalformedURLException mue)
-		{
-			System.out.println("! - Error Occured : URL Creation Failed - !");
-			return 1;
-		} catch (IOException ioe)
-		{
-			System.out.println("! - Error Occured : Connection Failed - !");
-			return 2;
-		}
+		return 0;
 	}
 
 	/*
@@ -84,7 +54,7 @@ public class DatabaseProtocol
 	 */
 	public boolean isConnected()
 	{
-		return false;
+		return connected;
 	};
 
 	/*
@@ -108,42 +78,48 @@ public class DatabaseProtocol
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<String> getAllSubjects()
+	{
+		ArrayList<String> returnArray = new ArrayList<String>();
+		returnArray.add("ACCT - Accounting");
+		returnArray.add("BIOL - Biology");
+		returnArray.add("COMP - Computer Science");
+		returnArray.add("CHEM - Chemistry");
+		returnArray.add("ELET - Electronics");
+		returnArray.add("ECON - Economics");
+		returnArray.add("ECNG - Elec & Comp Engineering");
+		returnArray.add("INFO - Information Technology");
+		returnArray.add("MATH - Mathematics");
+		returnArray.add("PHYS - Physics");
+		returnArray.add("PSYC - Psychology");
+		returnArray.add("SWEN - Software Engineering");
+		//TEST VALUE UNTIL IMPLEMENTED
+		return returnArray;
+	}
+	
+	/**
+	 * 
+	 * @param CRN
+	 * @return
+	 */
+	public Course getCourse(int CRN)
 	{
 		return null;
 	}
 
-	public Course getCourse(int CRN)
-	{
-		return difficult;
-	}
-
-	/*
+	/**
 	 * Registers a student with course information found in the given timetable
 	 */
-	public int registerStudent(Timetable time_tab)
+	public int registerStudent(Student student, Timetable timetable)
 	{
 		return 0;
 	}
 
-	/*
-	 * Converts the message into a format which can be understood by the
-	 * DatabaseProtocol.
-	 */
-	public String decode(SASData sasha)
-	{
 
-		return "";
-	}
-
-	/*
-	 * Converts the message into a format which can be uploaded back to the PHP
-	 * scripts.
-	 */
-	public SASData encode(String message)
-	{
-		return sash;
-	}
 
 	/**
 	 * Searches the database from the partial course information stored in a
@@ -155,7 +131,12 @@ public class DatabaseProtocol
 	 */
 	public ArrayList<Course> searchCourse(Course course)
 	{
-		return null;
+		ArrayList<Course> returnArray = new ArrayList<Course>();
+		returnArray.add(new Course(21548,"Introduction To Net-Centric Computing","M11","Computer Science","COMP2190",null,3,null,null));
+		returnArray.add(new Course(23423,"Introduction To Software Engineering","M11","Computer Science","COMP2140",null,3,null,null));
+		//TEST VALUE UNTIL IMPLEMENTED
+		return returnArray;
+				
 
 	}
 }

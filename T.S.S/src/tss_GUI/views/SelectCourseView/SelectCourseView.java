@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,7 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import tss_GUI.GUIDefs;
-import tss_GUI.LoadingDialog;
 import tss_GUI.views.FilterAndTimetableView.FilterAndTimetableView;
 import tss_core.Course;
 import tss_core.TSSCore;
@@ -33,22 +33,18 @@ public class SelectCourseView extends JPanel
 	private JList<Course> resultsList, registeredList;
 	private JScrollPane subjectScroll, campusScroll, levelScroll, resultsScroll, registeredScroll;
 	private TSSCore tssCore;
-	
-	private String[] subjects = {"ACCT - Accounting","BIOL - Biology","COMP - Computer Science","CHEM - Chemistry","ECON - Economics",
-			"ECNG - Elec & Comp Engineering","ELET - Electronics","INFO - Information Technology",
-			"MATH - Mathematics","PHYS - Physics","PSYC - Psychology","SWEN - Software Engineering"};
-	private String[] campuses = {"All","Mona","Mona - Bahamas","Mona - Bethlehem Teacher's College"};
-	private String[] levels = {"All","Graduate","Undergraduate"};
-	private Course[] testResults = {new Course(21548,"Introduction To Net-Centric Computing","M11","Computer Science","COMP2190",null,3,null,null),
-									new Course(23423,"Introduction To Software Engineering","M11","Computer Science","COMP2140",null,3,null,null)};
+	private ArrayList<Course> searchResults;
+	private ArrayList<Course> coursesToRegister;
 		
 	private JButton searchButton, addButton, removeButton, generateButton;
 	
 	private JPanel searchPanel, resultPanel, registeredPanel;
-	public SelectCourseView(TSSCore tssCore)
+	public SelectCourseView(TSSCore tssCore, ArrayList<String> subjects, String[] levels, String[] campuses)
 	{
 		this.tssCore = tssCore;
 		this.setLayout(new BorderLayout());
+		searchResults = new ArrayList<Course>();
+		
 		subjectLabel = new JLabel("Subject:");
 		subjectLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		subjectLabel.setFont(GUIDefs.BASE_HEADING_FONT);
@@ -68,7 +64,8 @@ public class SelectCourseView extends JPanel
 		courseNumField.setPreferredSize(new Dimension(50,25));
 		titleField = new JTextField(30);
 		titleField.setPreferredSize(new Dimension(300,25));
-		subjectList = new JList<String>(subjects);
+		String[] subjs = subjects.toArray(new String[subjects.size()]);
+		subjectList = new JList<String>(subjs);
 		subjectList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		campusList = new JList<String>(campuses);
 		campusList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
@@ -122,7 +119,7 @@ public class SelectCourseView extends JPanel
 		resultsLabel = new JLabel("Search Results");
 		resultsLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		resultsLabel.setFont(GUIDefs.BASE_HEADING_FONT);
-		resultsList = new JList<Course>(testResults);
+		resultsList = new JList<Course>((Course[])searchResults.toArray());
 		resultsList.setCellRenderer(new CourseCellRenderer());
 		resultsList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		resultsScroll = new JScrollPane(resultsList);
@@ -142,7 +139,7 @@ public class SelectCourseView extends JPanel
 		selectedLabel = new JLabel("Selected Courses:");
 		selectedLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		selectedLabel.setFont(GUIDefs.BASE_HEADING_FONT);
-		registeredList = new JList<Course>(testResults);
+		registeredList = new JList<Course>((Course[])coursesToRegister.toArray());
 		registeredList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		registeredList.setCellRenderer(new CourseCellRenderer());
 		registeredScroll = new JScrollPane(registeredList);

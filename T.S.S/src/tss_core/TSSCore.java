@@ -18,10 +18,16 @@ public class TSSCore extends JFrame
 	private DatabaseProtocol databaseProtocol = new DatabaseProtocol();
 	final private LoadingDialog LOADING_DIALOG = new LoadingDialog();
 	private boolean loading = false;
+	private SelectCourseView selectCourseView;
+	final static String[] COURSE_LEVELS = {"All","Graduate","Undergraduate"};
+	final static String[] CAMPUSES = {"All","Mona","Mona - Bahamas","Mona - Bethlehem Teacher's College"};
 	
 	public TSSCore()
 	{
-		this.setContentPane(new SelectCourseView(this));
+		this.setLoading(true);
+		selectCourseView = new SelectCourseView(this,databaseProtocol.getAllSubjects(),COURSE_LEVELS,CAMPUSES);
+		this.setContentPane(selectCourseView);
+		this.setLoading(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(APPLICATION_PREFERRED_SIZE);
 		this.setResizable(false);
