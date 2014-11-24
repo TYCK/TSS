@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import TSS.TSS;
+import tss_GUI.CourseCellRenderer;
+import tss_GUI.GUIDefs;
+import tss_core.Course;
 
 
 public class SelectCourseView extends JPanel
@@ -25,7 +27,8 @@ public class SelectCourseView extends JPanel
 	private static final long serialVersionUID = 6293736574643564977L;
 	private JLabel subjectLabel,courseNumLabel,titleLabel,campusLabel,courseLevelLabel, resultsLabel, selectedLabel;
 	private JTextField courseNumField, titleField;
-	private JList<String> subjectList, campusList, levelList, resultsList, registeredList;
+	private JList<String> subjectList, campusList, levelList;
+	private JList<Course> resultsList, registeredList;
 	private JScrollPane subjectScroll, campusScroll, levelScroll, resultsScroll, registeredScroll;
 	
 	private String[] subjects = {"ACCT - Accounting","BIOL - Biology","COMP - Computer Science","CHEM - Chemistry","ECON - Economics",
@@ -33,11 +36,8 @@ public class SelectCourseView extends JPanel
 			"MATH - Mathematics","PHYS - Physics","PSYC - Psychology","SWEN - Software Engineering"};
 	private String[] campuses = {"All","Mona","Mona - Bahamas","Mona - Bethlehem Teacher's College"};
 	private String[] levels = {"All","Graduate","Undergraduate"};
-	private String[] testResults = {"COMP1126 - Lecture","COMP1126 - Lab","COMP1126 - Tutorial",
-			"COMP1127 - Lecture","COMP1127 - Lab","COMP1127 - Tutorial",
-			"COMP1161 - Lecture","COMP1127 - Lab","COMP1127 - Tutorial",
-			"COMP1210 - Lecture","COMP1210 - Tutorial","COMP1220 - Lecture","COMP1220 - Tutorial",
-			"COMP2140 - Lecture","COMP2140 - Tutorial","COMP2190 - Lecture","COMP2190 - Tutorial"};
+	private Course[] testResults = {new Course(21548,"Introduction To Net-Centric Computing","M11","Computer Science","COMP2190",null,3,null,null),
+									new Course(23423,"Introduction To Software Engineering","M11","Computer Science","COMP2140",null,3,null,null)};
 		
 	private JButton searchButton, addButton, removeButton, generateButton;
 	
@@ -46,25 +46,30 @@ public class SelectCourseView extends JPanel
 	{
 		this.setLayout(new BorderLayout());
 		subjectLabel = new JLabel("Subject:");
-		subjectLabel.setForeground(TSS.textColor);
+		subjectLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		subjectLabel.setFont(GUIDefs.BASE_HEADING_FONT);
 		courseNumLabel = new JLabel("Course Number:");
-		courseNumLabel.setForeground(TSS.textColor);
+		courseNumLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		courseNumLabel.setFont(GUIDefs.BASE_HEADING_FONT);
 		titleLabel = new JLabel("Title:");
-		titleLabel.setForeground(TSS.textColor);
+		titleLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		titleLabel.setFont(GUIDefs.BASE_HEADING_FONT);
 		campusLabel = new JLabel("Campus:");
-		campusLabel.setForeground(TSS.textColor);
+		campusLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		campusLabel.setFont(GUIDefs.BASE_HEADING_FONT);
 		courseLevelLabel = new JLabel("Course Level:");
-		courseLevelLabel.setForeground(TSS.textColor);
+		courseLevelLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		courseLevelLabel.setFont(GUIDefs.BASE_HEADING_FONT);
 		courseNumField = new JTextField(4);
 		courseNumField.setPreferredSize(new Dimension(50,25));
 		titleField = new JTextField(30);
 		titleField.setPreferredSize(new Dimension(300,25));
 		subjectList = new JList<String>(subjects);
-		subjectList.setForeground(TSS.textColor);
+		subjectList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		campusList = new JList<String>(campuses);
-		campusList.setForeground(TSS.textColor);
+		campusList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		levelList = new JList<String>(levels);
-		levelList.setForeground(TSS.textColor);
+		levelList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		
 		subjectScroll = new JScrollPane(subjectList);
 		subjectScroll.setPreferredSize(new Dimension(200,100));
@@ -73,8 +78,8 @@ public class SelectCourseView extends JPanel
 		levelScroll = new JScrollPane(levelList);
 		levelScroll.setPreferredSize(new Dimension(200,100));
 		searchButton = new JButton("Search");
-		searchButton.setForeground(TSS.textColor);
-		searchButton.setBackground(new Color(255,255,255));
+		searchButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
+		searchButton.setBackground(Color.WHITE);
 		
 		searchPanel = new JPanel();
 		searchPanel.setLayout(new BoxLayout(searchPanel,BoxLayout.Y_AXIS));
@@ -104,48 +109,52 @@ public class SelectCourseView extends JPanel
 		searchPanel.add(campusLabel);
 		searchPanel.add(campusScroll);
 		searchPanel.add(searchButton);
-		searchPanel.setBackground(TSS.BACKDROP_COLOR);
+		searchPanel.setBackground(GUIDefs.BACKDROP_COLOR);
 		
 		resultPanel = new JPanel();
 		resultPanel.setLayout(new BoxLayout(resultPanel,BoxLayout.Y_AXIS));
 		resultPanel.setPreferredSize(new Dimension(350,720));
 		resultPanel.setMaximumSize(new Dimension(350,720));
 		resultsLabel = new JLabel("Search Results");
-		resultsLabel.setForeground(TSS.textColor);
-		resultsList = new JList<String>(testResults);
-		resultsList.setForeground(TSS.textColor);
+		resultsLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		resultsLabel.setFont(GUIDefs.BASE_HEADING_FONT);
+		resultsList = new JList<Course>(testResults);
+		resultsList.setCellRenderer(new CourseCellRenderer());
+		resultsList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		resultsScroll = new JScrollPane(resultsList);
 //		resultsScroll.setPreferredSize(new Dimension(256,720));
 		addButton = new JButton("Add Course");
-		addButton.setForeground(TSS.textColor);
-		addButton.setBackground(new Color(255,255,255));
+		addButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
+		addButton.setBackground(Color.WHITE);
 		addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		resultPanel.add(resultsLabel);
 		resultPanel.add(resultsScroll);
 		resultPanel.add(addButton);
-		resultPanel.setBackground(TSS.BACKDROP_COLOR);
+		resultPanel.setBackground(GUIDefs.BACKDROP_COLOR);
 		
 		registeredPanel = new JPanel();
 		registeredPanel.setLayout(new BoxLayout(registeredPanel,BoxLayout.Y_AXIS));
 		registeredPanel.setPreferredSize(new Dimension(350,720));
 		selectedLabel = new JLabel("Selected Courses:");
-		selectedLabel.setForeground(TSS.textColor);
-		registeredList = new JList<String>(testResults);
-		registeredList.setForeground(TSS.textColor);
+		selectedLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
+		selectedLabel.setFont(GUIDefs.BASE_HEADING_FONT);
+		registeredList = new JList<Course>(testResults);
+		registeredList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
+		registeredList.setCellRenderer(new CourseCellRenderer());
 		registeredScroll = new JScrollPane(registeredList);
 //		registeredScroll.setPreferredSize(new Dimension(256,720));
 		removeButton = new JButton("Remove Course");
-		removeButton.setForeground(TSS.textColor);
+		removeButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		removeButton.setBackground(new Color(255,255,255));
 		removeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		registeredPanel.add(selectedLabel);
 		registeredPanel.add(registeredScroll);
 		registeredPanel.add(removeButton);
-		registeredPanel.setBackground(TSS.BACKDROP_COLOR);
+		registeredPanel.setBackground(GUIDefs.BACKDROP_COLOR);
 		
 		generateButton = new JButton("Generate Timetables");
-		generateButton.setForeground(TSS.textColor);
-		generateButton.setBackground(Color.white);
+		generateButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
+		generateButton.setBackground(Color.WHITE);
 		generateButton.addActionListener(new ActionListener()
 		{
 
