@@ -1,4 +1,4 @@
-package tss_GUI;
+package tss_GUI.views.SelectCourseView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
+import tss_GUI.GUIDefs;
 import tss_core.Course;
 
 public class CourseCellRenderer implements ListCellRenderer

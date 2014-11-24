@@ -1,9 +1,10 @@
-package tss_GUI.views;
+package tss_GUI.views.FilterAndTimetableView;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,13 +15,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.BevelBorder;
 
-import TSS.SelectCoursePane;
-import TSS.TSS;
-import TSS.TimeTablePane;
-import TSS.dialogs.AddFilterDialogPanel;
+import tss_GUI.GUIDefs;
+import tss_GUI.views.SelectCourseView.SelectCourseView;
+import tss_core.Course;
+import tss_core.TSSCore;
 
 public class FilterAndTimetableView extends JPanel
 {
+	private TSSCore tssCore;
 	private JPanel topPanel;
 	private TimeTablePane timetablePanel;
 	private JPanel lowerButtonPanel;
@@ -35,32 +37,33 @@ public class FilterAndTimetableView extends JPanel
 	
 	private  AddFilterDialogPanel addFilterDialogPanel = new AddFilterDialogPanel();
 
-	public FilterAndTimetableView()
+	public FilterAndTimetableView(TSSCore tssCore, ArrayList<Course> courses)
 	{
+		this.tssCore = tssCore;
 		backButton = new JButton("Back To Select Courses");
 		backButton.setPreferredSize(new Dimension(200, 100));
 		backButton.setBackground(Color.white);
-		backButton.setForeground(TSS.textColor);
+		backButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		filterLabel = new JLabel("Filters");
-		filterLabel.setForeground(TSS.textColor);
+		filterLabel.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		filterScroll = new JScrollPane(new JList<String>(sampleFilters));
-		filterScroll.setForeground(TSS.textColor);
+		filterScroll.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		filterScroll.setPreferredSize(new Dimension(450, 70));
 		addFilterButton = new JButton("Add Filter");
-		addFilterButton.setBackground(Color.white);
-		addFilterButton.setForeground(TSS.textColor);
+		addFilterButton.setBackground(Color.white);	
+		addFilterButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		addFilterButton.setPreferredSize(new Dimension(225, 30));
 		deleteFilterButton = new JButton("Delete Filter");
 		deleteFilterButton.setBackground(Color.white);
-		deleteFilterButton.setForeground(TSS.textColor);
+		deleteFilterButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		deleteFilterButton.setPreferredSize(new Dimension(225, 30));
 		errorLabel = new JLabel("Errors");
-		errorLabel.setForeground(TSS.textColor);
+		errorLabel.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		errorScroll = new JScrollPane();
 		errorScroll.setPreferredSize(new Dimension(590, 70));
 		requestOverrideButton = new JButton("Request Override");
 		requestOverrideButton.setBackground(Color.white);
-		requestOverrideButton.setForeground(TSS.textColor);
+		requestOverrideButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		requestOverrideButton.setPreferredSize(new Dimension(300, 30));
 
 		topPanel = new JPanel();
@@ -82,21 +85,21 @@ public class FilterAndTimetableView extends JPanel
 		errorPanel.add(errorScroll, BorderLayout.CENTER);
 		errorPanel.add(requestOverrideButton, BorderLayout.SOUTH);
 		topPanel.add(errorPanel);
-		topPanel.setBackground(TSS.BACKDROP_COLOR);
+		topPanel.setBackground(GUIDefs.BACKDROP_COLOR);
 
 		timetablePanel = new TimeTablePane();
-		timetablePanel.setBackground(TSS.BACKDROP_COLOR);
+		timetablePanel.setBackground(GUIDefs.BACKDROP_COLOR);
 
 		registerButton = new JButton("Register Selected Timetable");
 		registerButton.setBackground(Color.white);
-		registerButton.setForeground(TSS.textColor);
-		registerButton.setSize(new Dimension(TSS.APPLICATION_PREFERRED_SIZE.width,30));
+		registerButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
+		registerButton.setSize(new Dimension(TSSCore.APPLICATION_PREFERRED_SIZE.width,30));
 		
 		lowerButtonPanel = new JPanel();
 		lowerButtonPanel.setLayout(new BorderLayout());
 		downloadButton = new JButton("Download Selected Timetable");
 		downloadButton.setBackground(Color.white);
-		downloadButton.setForeground(TSS.textColor);
+		downloadButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		lowerButtonPanel.add(downloadButton,BorderLayout.NORTH);
 		lowerButtonPanel.add(registerButton,BorderLayout.SOUTH);
 
@@ -126,7 +129,7 @@ public class FilterAndTimetableView extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				removeAll();
-				add(new SelectCoursePane());
+				add(new SelectCourseView(tssCore));
 				revalidate();
 				repaint();
 			}

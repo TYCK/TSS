@@ -1,4 +1,4 @@
-package tss_GUI.views;
+package tss_GUI.views.SelectCourseView;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import tss_GUI.CourseCellRenderer;
 import tss_GUI.GUIDefs;
+import tss_GUI.LoadingDialog;
+import tss_GUI.views.FilterAndTimetableView.FilterAndTimetableView;
 import tss_core.Course;
+import tss_core.TSSCore;
 
 
 public class SelectCourseView extends JPanel
@@ -30,6 +32,7 @@ public class SelectCourseView extends JPanel
 	private JList<String> subjectList, campusList, levelList;
 	private JList<Course> resultsList, registeredList;
 	private JScrollPane subjectScroll, campusScroll, levelScroll, resultsScroll, registeredScroll;
+	private TSSCore tssCore;
 	
 	private String[] subjects = {"ACCT - Accounting","BIOL - Biology","COMP - Computer Science","CHEM - Chemistry","ECON - Economics",
 			"ECNG - Elec & Comp Engineering","ELET - Electronics","INFO - Information Technology",
@@ -42,8 +45,9 @@ public class SelectCourseView extends JPanel
 	private JButton searchButton, addButton, removeButton, generateButton;
 	
 	private JPanel searchPanel, resultPanel, registeredPanel;
-	public SelectCourseView()
+	public SelectCourseView(TSSCore tssCore)
 	{
+		this.tssCore = tssCore;
 		this.setLayout(new BorderLayout());
 		subjectLabel = new JLabel("Subject:");
 		subjectLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
@@ -161,10 +165,9 @@ public class SelectCourseView extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				removeAll();
-				add(new FilterAndTimetableView());
+				add(new FilterAndTimetableView(tssCore,null));
 				revalidate();
 				repaint();
-				
 			}
 				
 		});	
