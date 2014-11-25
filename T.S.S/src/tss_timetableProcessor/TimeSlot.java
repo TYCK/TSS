@@ -1,6 +1,8 @@
-package tss_core;
+package tss_timetableProcessor;
 
 import java.util.ArrayList;
+
+import tss_core.Course;
 
 public class TimeSlot
 {
@@ -32,8 +34,8 @@ public class TimeSlot
 	 */
 	public boolean clashesWith(TimeSlot timeSlot)
 	{
-		return !(this.getDay() == timeSlot.getDay() && ((this.beginTime < timeSlot.beginTime && this.endTime < timeSlot.beginTime) ||
-			    (this.beginTime > timeSlot.endTime)));
+		return (timeSlot != null && this.getDay() == timeSlot.getDay() && (!(this.beginTime < timeSlot.beginTime && this.endTime < timeSlot.beginTime) ||
+			    !(this.beginTime > timeSlot.endTime)));
 	}
 	
 	public int getBeginTime()
@@ -67,6 +69,27 @@ public class TimeSlot
 		for(int i = this.beginTime; i < this.endTime; ++i)
 			returnList.add(new TimeSlot(i,i+1,this.getCourse(),this.getDay()));
 		return returnList;
+	}
+	
+	public static String day(int day)
+	{
+		switch(day)
+		{
+		case MONDAY:
+			return "Monday";
+		case TUESDAY:
+			return "Tuesday";
+		case WEDNESDAY:
+			return "Wednesday";
+		case THURSDAY:
+			return "Thursday";
+		case FRIDAY:
+			return "Friday";
+		case SATURDAY:
+			return "Saturday";
+			default:
+				return "";
+		}
 	}
 
 }

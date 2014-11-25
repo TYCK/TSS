@@ -2,6 +2,8 @@ package tss_core;
 
 import java.util.ArrayList;
 
+import tss_timetableProcessor.TimeSlot;
+
 public class Course
 {
     private int Crn;

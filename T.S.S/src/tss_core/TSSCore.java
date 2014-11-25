@@ -14,7 +14,7 @@ public class TSSCore extends JFrame
 	final static int ID = 620063216;
 	
 	private static Student student;
-	final static public Dimension APPLICATION_PREFERRED_SIZE = new Dimension(1280,720);
+	final static public Dimension APPLICATION_PREFERRED_SIZE = new Dimension(1280,800);
 	private DatabaseProtocol databaseProtocol = new DatabaseProtocol();
 	final private LoadingDialog LOADING_DIALOG = new LoadingDialog();
 	private boolean loading = false;
@@ -71,6 +71,11 @@ public class TSSCore extends JFrame
 	public boolean isLoading()
 	{
 		return loading;
+	}
+	
+	public SelectCourseView getSelectCourseView()
+	{
+		return selectCourseView;
 	}
 	
 

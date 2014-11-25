@@ -1,16 +1,11 @@
 package tss_databaseCommunicator;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import tss_core.Course;
 import tss_core.Student;
-import tss_core.Timetable;
+import tss_timetableProcessor.Timetable;
 
 /**
  * 

@@ -1,8 +1,11 @@
 package src.tss_databaseCommunicator;
 
-import src.tss_core.*;
-import java.util.*;
 import java.net.URL;
+import java.util.ArrayList;
+
+import tss_core.Course;
+import tss_core.Student;
+import tss_timetableProcessor.Timetable;
 
 public class DatabaseInterface {
 

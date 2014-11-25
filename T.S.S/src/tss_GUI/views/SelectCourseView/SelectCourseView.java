@@ -119,7 +119,7 @@ public class SelectCourseView extends JPanel
 		resultsLabel = new JLabel("Search Results");
 		resultsLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		resultsLabel.setFont(GUIDefs.BASE_HEADING_FONT);
-		resultsList = new JList<Course>((Course[])searchResults.toArray());
+		resultsList = new JList<Course>();
 		resultsList.setCellRenderer(new CourseCellRenderer());
 		resultsList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		resultsScroll = new JScrollPane(resultsList);
@@ -139,7 +139,7 @@ public class SelectCourseView extends JPanel
 		selectedLabel = new JLabel("Selected Courses:");
 		selectedLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		selectedLabel.setFont(GUIDefs.BASE_HEADING_FONT);
-		registeredList = new JList<Course>((Course[])coursesToRegister.toArray());
+		registeredList = new JList<Course>();
 		registeredList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		registeredList.setCellRenderer(new CourseCellRenderer());
 		registeredScroll = new JScrollPane(registeredList);
@@ -161,10 +161,9 @@ public class SelectCourseView extends JPanel
 
 			public void actionPerformed(ActionEvent arg0)
 			{
-				removeAll();
-				add(new FilterAndTimetableView(tssCore,null));
-				revalidate();
-				repaint();
+				tssCore.setContentPane(new FilterAndTimetableView(tssCore,null));
+				tssCore.revalidate();
+				tssCore.repaint();
 			}
 				
 		});	

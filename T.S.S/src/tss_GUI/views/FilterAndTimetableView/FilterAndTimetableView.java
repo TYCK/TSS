@@ -7,18 +7,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 
 import tss_GUI.GUIDefs;
-import tss_GUI.views.SelectCourseView.SelectCourseView;
 import tss_core.Course;
 import tss_core.TSSCore;
+import tss_timetableProcessor.Filter;
+import tss_timetableProcessor.TimeSlot;
+import tss_timetableProcessor.Timetable;
 
 public class FilterAndTimetableView extends JPanel
 {
@@ -29,16 +32,17 @@ public class FilterAndTimetableView extends JPanel
 
 	private JLabel filterLabel, errorLabel;
 	private JScrollPane filterScroll, errorScroll;
+	private JList<Filter> filterList;
+	private DefaultListModel<Filter> filterListModel;
+	
 	private JButton backButton, addFilterButton, deleteFilterButton,
 			requestOverrideButton, downloadButton, registerButton;
 
 
-	String[] sampleFilters = { "Time Filter1 - none before 9AM on TUE,WED, THU " };
 	
-	private  AddFilterDialogPanel addFilterDialogPanel = new AddFilterDialogPanel();
-
 	public FilterAndTimetableView(TSSCore tssCore, ArrayList<Course> courses)
 	{
+		AddFilterDialog addDialog = new AddFilterDialog();
 		this.tssCore = tssCore;
 		backButton = new JButton("Back To Select Courses");
 		backButton.setPreferredSize(new Dimension(200, 100));
@@ -46,7 +50,10 @@ public class FilterAndTimetableView extends JPanel
 		backButton.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		filterLabel = new JLabel("Filters");
 		filterLabel.setForeground(GUIDefs.COMMON_TEXT_COLOR);
-		filterScroll = new JScrollPane(new JList<String>(sampleFilters));
+		filterListModel = new DefaultListModel<Filter>();
+		filterList = new JList<Filter>(filterListModel);
+		filterList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		filterScroll = new JScrollPane(filterList);
 		filterScroll.setForeground(GUIDefs.COMMON_TEXT_COLOR);
 		filterScroll.setPreferredSize(new Dimension(450, 70));
 		addFilterButton = new JButton("Add Filter");
@@ -86,8 +93,13 @@ public class FilterAndTimetableView extends JPanel
 		errorPanel.add(requestOverrideButton, BorderLayout.SOUTH);
 		topPanel.add(errorPanel);
 		topPanel.setBackground(GUIDefs.BACKDROP_COLOR);
-
-		timetablePanel = new TimeTablePane();
+		
+		ArrayList<Timetable> t = new ArrayList<Timetable>();
+		t.add(new Timetable(8, 20));
+		t.add(new Timetable(8, 16));
+		t.add(new Timetable(8, 10));
+		t.get(0).addTimeSlot(new TimeSlot(10,12,new Course(21548,"Introduction To Net-Centric Computing","M11","Computer Science","COMP2190",null,3,null,null),TimeSlot.MONDAY), false);
+		timetablePanel = new TimeTablePane(t);
 		timetablePanel.setBackground(GUIDefs.BACKDROP_COLOR);
 
 		registerButton = new JButton("Register Selected Timetable");
@@ -112,13 +124,19 @@ public class FilterAndTimetableView extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0)
 			{
-				JDialog addDialog = new JDialog();
-				addDialog.add(addFilterDialogPanel);
-				addDialog.setModal(true);
-				addDialog.pack();
-				addDialog.setLocationRelativeTo(null);
-				addDialog.setTitle("Add Filter");
-				addDialog.setVisible(true);
+				addDialog.Show();
+				Filter f = addDialog.getFilter();
+				if(f != null)
+					filterListModel.addElement(f);
+			}
+		}
+		);
+		deleteFilterButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				if(!filterList.isSelectionEmpty())
+				filterListModel.removeElementAt(filterList.getSelectedIndex());
 			}
 		}
 		);
@@ -128,10 +146,9 @@ public class FilterAndTimetableView extends JPanel
 
 			public void actionPerformed(ActionEvent arg0)
 			{
-				removeAll();
-				add(new SelectCourseView(tssCore));
-				revalidate();
-				repaint();
+				tssCore.setContentPane(tssCore.getSelectCourseView());
+				tssCore.revalidate();
+				tssCore.repaint();
 			}
 
 		});
