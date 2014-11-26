@@ -8,11 +8,11 @@ public class Course
 {
     private int Crn;
     private String title;
-    private String Subject;
+    private int Subject;
     private String code;
     private int credit;
     private ArrayList <TimeSlot> timeslotlist = new ArrayList <TimeSlot> ();
-    private ArrayList<Course> prereqlist = new ArrayList <Course> ();
+    private ArrayList<String> prereqlist = new ArrayList <String> ();
     private String location;
     private String type;
     
@@ -22,12 +22,15 @@ public class Course
      * Constructor for objects of class Course
      */
     
-    public Course(int CRN, String Title,String Type, String subject, String Code, ArrayList <TimeSlot> timeslot, int credits, ArrayList <Course> prereq, String Location)
+    public Course(int CRN, String Title,String Type, int subject, String Code, ArrayList <TimeSlot> timeslot, int credits, ArrayList<String> prereq, String Location)
     {
         Crn = CRN;
         Subject = subject;
         title = Title;
         code = Code;
+        if(timeslot != null)
+        for(int i = 0; i < timeslot.size(); ++i)
+        	timeslot.get(i).setCourse(this);
         timeslotlist = timeslot;
         credit = credits;
         prereqlist = prereq;
@@ -55,7 +58,7 @@ public class Course
     /**
      * @return  the subject the course falls under 
      */
-    public String getSubject()
+    public int getSubject()
     {
       return Subject;
     }
@@ -88,7 +91,7 @@ public ArrayList <TimeSlot> getTimeslot()
     /**
      * @return the prerequisite courses of the desired course
      */
-  public ArrayList<Course> getPrereq()
+  public ArrayList<String> getPrereq()
     {
         return prereqlist;
     }

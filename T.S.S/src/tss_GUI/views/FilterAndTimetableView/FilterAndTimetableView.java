@@ -98,7 +98,7 @@ public class FilterAndTimetableView extends JPanel
 		t.add(new Timetable(8, 20));
 		t.add(new Timetable(8, 16));
 		t.add(new Timetable(8, 10));
-		t.get(0).addTimeSlot(new TimeSlot(10,12,new Course(21548,"Introduction To Net-Centric Computing","M11","Computer Science","COMP2190",null,3,null,null),TimeSlot.MONDAY), false);
+		t.get(0).addTimeSlot(new TimeSlot(10,12,new Course(21548,"Introduction To Net-Centric Computing","M11",18,"COMP2190",null,3,null,null),TimeSlot.MONDAY), false);
 		timetablePanel = new TimeTablePane(t);
 		timetablePanel.setBackground(GUIDefs.BACKDROP_COLOR);
 

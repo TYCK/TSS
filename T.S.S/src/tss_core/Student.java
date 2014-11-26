@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class Student extends Person
 {
-    private ArrayList <String> coursespassed = new ArrayList <String> ();
+    private ArrayList <String> coursespassed;
     private boolean cleared;
     private int ID;
-    private ArrayList <Course> registeredcourses;
+    private ArrayList <String> registeredcourses;
 
-    public Student(int id, String firstName, String lastName, ArrayList <String> coursesPassed, boolean financiallycleared, ArrayList <Course> registeredCourses)
+    public Student(int id, String firstName, String lastName, ArrayList <String> coursesPassed, boolean financiallycleared, ArrayList <String> registeredCourses)
     {
     	super(firstName,lastName);
         ID = id;
@@ -52,7 +52,7 @@ public class Student extends Person
         return ID;
     }
     
-    public ArrayList <Course> getregisteredc(){
+    public ArrayList <String> getregisteredCoursesCRN(){
          return registeredcourses;
     } 
 }
