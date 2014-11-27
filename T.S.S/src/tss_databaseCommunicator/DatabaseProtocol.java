@@ -22,7 +22,7 @@ import tss_timetableProcessor.Timetable;
 public class DatabaseProtocol
 {
 
-	final private String SERVER_IP = "localhost";
+	final private String SERVER_IP = "172.16.149.200";
 	public final static int SUCCESS = 1;
 	final int FAILED = 0;
 	final private String CHECK_CONNECTION_URL = "http://" + SERVER_IP

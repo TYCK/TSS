@@ -143,7 +143,6 @@ public class TimeSlot
 			}
 			else if(Integer.parseInt(String.valueOf(temp.charAt(2))+String.valueOf(temp.charAt(3))) > 0)
 				++endTime;
-			System.out.println(endTime);
 			returnSlot = new TimeSlot(beginTime,endTime,null,Day);
 		}catch(Exception e)
 		{

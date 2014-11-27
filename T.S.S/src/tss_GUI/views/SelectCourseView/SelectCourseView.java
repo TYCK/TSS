@@ -168,7 +168,14 @@ public class SelectCourseView extends JPanel
 
 			public void actionPerformed(ActionEvent arg0)
 			{
-				tssCore.setContentPane(new FilterAndTimetableView(tssCore, null));
+				ArrayList<Course> courses = new ArrayList<Course>();
+				if(registeredListModel.size() > 0)
+				{
+					for(int i = 0; i < registeredListModel.getSize(); ++i)
+						courses.add(registeredListModel.get(i));
+					
+				}
+				tssCore.setContentPane(new FilterAndTimetableView(tssCore, courses));
 				tssCore.revalidate();
 				tssCore.repaint();
 			}

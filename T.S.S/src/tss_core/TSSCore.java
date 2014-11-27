@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import tss_GUI.LoadingDialog;
 import tss_GUI.views.SelectCourseView.SelectCourseView;
 import tss_databaseCommunicator.DatabaseProtocol;
+import tss_timetableProcessor.TimetableGenerator;
 
 public class TSSCore extends JApplet
 {

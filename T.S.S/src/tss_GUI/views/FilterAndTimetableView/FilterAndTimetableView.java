@@ -22,6 +22,7 @@ import tss_core.TSSCore;
 import tss_timetableProcessor.Filter;
 import tss_timetableProcessor.TimeSlot;
 import tss_timetableProcessor.Timetable;
+import tss_timetableProcessor.TimetableGenerator;
 
 public class FilterAndTimetableView extends JPanel
 {
@@ -42,8 +43,17 @@ public class FilterAndTimetableView extends JPanel
 	
 	public FilterAndTimetableView(TSSCore tssCore, ArrayList<Course> courses)
 	{
-		AddFilterDialog addDialog = new AddFilterDialog();
 		this.tssCore = tssCore;
+		this.tssCore.setLoading(true);
+		ArrayList<Course> coursesSelected = new ArrayList<Course>();
+		for(int i = 0; i < courses.size(); ++i)
+		{
+			Course c = courses.get(i);
+			coursesSelected.addAll(tssCore.getDatabaseProtocol().searchCourse(new Course(c.getTitle(),c.getSubject(),c.getCode(),-1)));
+		}
+		ArrayList<Timetable> allPossible = TimetableGenerator.generateAllPossibleTimetables(coursesSelected);
+		
+		AddFilterDialog addDialog = new AddFilterDialog();
 		backButton = new JButton("Back To Select Courses");
 		backButton.setPreferredSize(new Dimension(200, 100));
 		backButton.setBackground(Color.white);
@@ -94,12 +104,7 @@ public class FilterAndTimetableView extends JPanel
 		topPanel.add(errorPanel);
 		topPanel.setBackground(GUIDefs.BACKDROP_COLOR);
 		
-		ArrayList<Timetable> t = new ArrayList<Timetable>();
-		t.add(new Timetable(8, 20));
-		t.add(new Timetable(8, 16));
-		t.add(new Timetable(8, 10));
-		t.get(0).addTimeSlot(new TimeSlot(10,12,new Course(21548,"Introduction To Net-Centric Computing","M11",18,"COMP2190",null,3,null,null),TimeSlot.MONDAY), false);
-		timetablePanel = new TimeTablePane(t);
+		timetablePanel = new TimeTablePane(allPossible);
 		timetablePanel.setBackground(GUIDefs.BACKDROP_COLOR);
 
 		registerButton = new JButton("Register Selected Timetable");
@@ -152,6 +157,7 @@ public class FilterAndTimetableView extends JPanel
 			}
 
 		});
+		this.tssCore.setLoading(false);
 	}
 	
 }

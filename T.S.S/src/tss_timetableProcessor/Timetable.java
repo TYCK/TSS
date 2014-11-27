@@ -66,6 +66,7 @@ public class Timetable
 			for(int i = 0; i < slotsToAdd.size();++i)
 			{
 				TimeSlot slotToAdd = slotsToAdd.get(i);
+				System.out.println(slotToAdd.getBeginTime()+" "+this.getStartHr() +" "+ slotToAdd.getCourse().getCode());
 				timeSlots[slotToAdd.getDay()][slotToAdd.getBeginTime()-this.getStartHr()] = slotToAdd;
 			}
 		}
