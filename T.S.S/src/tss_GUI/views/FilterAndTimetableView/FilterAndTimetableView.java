@@ -46,10 +46,12 @@ public class FilterAndTimetableView extends JPanel
 		this.tssCore = tssCore;
 		this.tssCore.setLoading(true);
 		ArrayList<Course> coursesSelected = new ArrayList<Course>();
+		
 		for(int i = 0; i < courses.size(); ++i)
 		{
 			Course c = courses.get(i);
-			coursesSelected.addAll(tssCore.getDatabaseProtocol().searchCourse(new Course(c.getTitle(),c.getSubject(),c.getCode(),-1)));
+			coursesSelected.addAll(tssCore.getDatabaseProtocol().searchCourse(new Course(c.getTitle(),String.valueOf(c.getType().charAt(0)),
+					c.getSubject(),c.getCode(),-1)));
 		}
 		ArrayList<Timetable> allPossible = TimetableGenerator.generateAllPossibleTimetables(coursesSelected);
 		

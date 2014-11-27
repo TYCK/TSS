@@ -15,14 +15,12 @@ import tss_timetableProcessor.TimeSlot;
 import tss_timetableProcessor.Timetable;
 
 /**
- * 
- * @author Christopher Derrell
  * @author Yerodin Richards
  */
 public class DatabaseProtocol
 {
 
-	final private String SERVER_IP = "172.16.149.200";
+	final private String SERVER_IP = "localhost";
 	public final static int SUCCESS = 1;
 	final int FAILED = 0;
 	final private String CHECK_CONNECTION_URL = "http://" + SERVER_IP
@@ -192,6 +190,8 @@ public class DatabaseProtocol
 			params.add(new BasicNameValuePair("Code", course.getCode()));
 		if (course.getTitle() != null)
 			params.add(new BasicNameValuePair("Title", course.getTitle()));
+		if(course.getType() != null)
+			params.add(new BasicNameValuePair("Type", course.getType()));
 		params.add(new BasicNameValuePair("Subject", String.valueOf(course.getSubject())));
 		JSONObject jObj = jParser.makeHttpRequest(SEARCH_COURSE_URL, "GET", params);
 		try

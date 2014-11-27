@@ -18,6 +18,7 @@ public class Timetable
 {
 	private TimeSlot[][] timeSlots;
 	private int startHr, endHr;
+	private boolean clashes;
 	
 	/**
 	 * 
@@ -59,21 +60,32 @@ public class Timetable
 		int day = timeSlot.getDay();
 		for(int i = 0; i < timeSlots[day].length;++i)
 			if(timeSlot.clashesWith(timeSlots[day][i]))
+			{
+				System.out.println(timeSlot);
+				System.out.println(timeSlots[day][i]);
 				returnArray.add(timeSlots[day][i]);
+			}
 		if(returnArray.size() == 0 || forceOverwrite)
 		{
 			ArrayList<TimeSlot> slotsToAdd = timeSlot.split();
 			for(int i = 0; i < slotsToAdd.size();++i)
 			{
 				TimeSlot slotToAdd = slotsToAdd.get(i);
-				System.out.println(slotToAdd.getBeginTime()+" "+this.getStartHr() +" "+ slotToAdd.getCourse().getCode());
 				timeSlots[slotToAdd.getDay()][slotToAdd.getBeginTime()-this.getStartHr()] = slotToAdd;
 			}
 		}
 		if(returnArray.size() == 0)
 			return null;
 		else
+		{
+			this.clashes = true;
 			return returnArray;
+		}
+	}
+	
+	public boolean hasClashes()
+	{
+		return clashes;
 	}
 	
 	public Image generateImage()

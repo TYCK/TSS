@@ -42,6 +42,10 @@ public class Course
 	{
 		this(-1,Title,null,subject,Code,null,credits,null,null);
 	}
+	public Course(String Title,String Type, int subject, String Code,int credits)
+	{
+		this(-1,Title,Type,subject,Code,null,credits,null,null);
+	}
 
 	/**
 	 * @return the course registration number

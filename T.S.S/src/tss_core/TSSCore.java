@@ -29,11 +29,21 @@ public class TSSCore extends JApplet
 	
 	public TSSCore()
 	{
+//		ArrayList<Integer> pool = new ArrayList<Integer>();
+//		pool.add(6);
+//		pool.add(4);
+//		pool.add(8);
+//		pool.add(2);
+//		pool.add(4);
+//		pool.add(6);
+//		ArrayList<String> perms = TimetableGenerator.getPermutes2(pool);
+//		System.out.println(perms.size());
 		this.setLoading(true);
 		this.databaseProtocol = new DatabaseProtocol();
 		databaseProtocol.connect();
 		if(!databaseProtocol.isConnected())
 		{
+			this.setLoading(false);
 			JOptionPane.showMessageDialog(null, "Error Connecting to Database", "Error", JOptionPane.ERROR_MESSAGE);
 			System.out.println("error");
 			System.exit(0);

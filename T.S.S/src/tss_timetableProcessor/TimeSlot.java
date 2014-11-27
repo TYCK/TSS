@@ -26,6 +26,12 @@ public class TimeSlot
 		this.day = day;
 
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.beginTime+" "+this.endTime+" "+this.course.getCode()+" "+this.course.getType()+" "+this.day; 
+	}
 
 	/**
 	 * Checks if this TimeSlot clashes with the times of another TimeSlot.
@@ -36,7 +42,11 @@ public class TimeSlot
 	 */
 	public boolean clashesWith(TimeSlot timeSlot)
 	{
-		return (timeSlot != null && this.getDay() == timeSlot.getDay() && (!(this.beginTime < timeSlot.beginTime && this.endTime < timeSlot.beginTime) || !(this.beginTime > timeSlot.endTime)));
+		return (timeSlot != null && this.getDay() == timeSlot.getDay() && (
+				(this.beginTime > timeSlot.beginTime && this.beginTime < timeSlot.endTime) || 
+						(this.endTime > timeSlot.beginTime && this.beginTime < timeSlot.getEndTime()) ||
+						(this.beginTime == timeSlot.beginTime || this.endTime == timeSlot.endTime)
+						));
 	}
 
 	public void setCourse(Course course)
