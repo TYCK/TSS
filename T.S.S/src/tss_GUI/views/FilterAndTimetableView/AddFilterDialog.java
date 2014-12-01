@@ -18,8 +18,17 @@ import javax.swing.JTextField;
 import tss_GUI.GUIDefs;
 import tss_timetableProcessor.Filter;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class AddFilterDialog extends JDialog
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Filter filter;
 	private JPanel topPanel, centerPanel, bottomPanel;
 	final private String[] types = { "Time Filter", "Course Filter" };

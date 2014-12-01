@@ -22,6 +22,11 @@ import tss_GUI.views.FilterAndTimetableView.FilterAndTimetableView;
 import tss_core.Course;
 import tss_core.TSSCore;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class SelectCourseView extends JPanel
 {
 	/**

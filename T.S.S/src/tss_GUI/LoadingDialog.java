@@ -8,6 +8,11 @@ import javax.swing.JLabel;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class LoadingDialog extends JDialog
 {
 	JLabel loadingText = new JLabel("Loading...");

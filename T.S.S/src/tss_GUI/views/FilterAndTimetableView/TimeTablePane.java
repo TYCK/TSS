@@ -15,8 +15,19 @@ import tss_GUI.GUIDefs;
 import tss_core.TSSCore;
 import tss_timetableProcessor.Timetable;
 
+/**
+ * This class servers as the timetable gallery. It draws the timetables and allows the user to
+ * scroll through the gallery.
+ * @author Yerodin Richards
+ * 
+ *
+ */
 public class TimeTablePane extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Timetable[] timetables;
 	private int currentlySelected;
 	private Image prevArrow, nextArrow;

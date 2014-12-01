@@ -15,6 +15,11 @@ import javax.swing.SwingConstants;
 import tss_GUI.GUIDefs;
 import tss_core.Course;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class CourseCellRenderer implements ListCellRenderer
 {
 

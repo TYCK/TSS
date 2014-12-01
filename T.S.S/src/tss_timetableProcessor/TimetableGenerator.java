@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import tss_core.Course;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class TimetableGenerator
 {
 	public static ArrayList<Timetable> generateTimetables(ArrayList<Course> courses,
@@ -82,55 +87,12 @@ public class TimetableGenerator
 		
 	}
 
-	public static ArrayList<String> getPermutes(ArrayList<Integer> eachPoolSize)
-	{
-		ArrayList<String> returnList = new ArrayList<String>();
-		if (eachPoolSize.size() >= 1)
-		{
-			for (int a = 0; a < eachPoolSize.get(0); ++a)
-			{
-				if (eachPoolSize.size() >= 2)
-				{
-					for (int b = 0; b < eachPoolSize.get(1); ++b)
-					{
-						if (eachPoolSize.size() >= 3)
-						{
-							for (int c = 0; c < eachPoolSize.get(2); ++c)
-							{
-								if (eachPoolSize.size() >= 4)
-								{
-									for (int d = 0; d < eachPoolSize.get(3); ++d)
-									{
-										if (eachPoolSize.size() >= 5)
-										{
-											for (int e = 0; e < eachPoolSize.get(4); ++e)
-											{
-												if (eachPoolSize.size() >= 6)
-													for (int f = 0; f < eachPoolSize.get(5); ++f)
-													{
-														returnList.add(a + " " + b + " " + c + " "
-																+ d + " " + e + " " + f);
-													}
-												else
-													returnList.add(a + " " + b + " " + c + " " + d
-															+ " " + e);
-											}
-										} else
-											returnList.add(a + " " + b + " " + c + " " + d);
-									}
-								} else
-									returnList.add(a + " " + b + " " + c);
-							}
-						} else
-							returnList.add(a + " " + b);
-					}
-				} else
-					returnList.add(String.valueOf(a));
-			}
-		}
-		return returnList;
-	}
-
+	/**
+	 * A function that is used to get all the combinations of courses from all the pools.
+	 * @param eachPoolSize The amount of course streams in each pool
+	 * @author Yerodin
+	 * @return An arrayList of String with all the combinations in the form "xxxx" where x is the xth index of the pool.
+	 */
 	public static ArrayList<String> getPermutes2(ArrayList<Integer> eachPoolSize)
 	{
 		String current = "";
@@ -139,6 +101,14 @@ public class TimetableGenerator
 		return recursivePermutes(eachPoolSize,current);
 	}
 	
+	/**
+	 * A recursive function that calculates all the permutations of an integer string by specifying the maximum number from
+	 * 0 in which each number in the string can get.
+	 * @param eachSize a list with the maximum of each integer in the string from 0;
+	 * @param current the string to be processed
+	 * @author Yerodin Richards
+	 * @return the permutations.
+	 */
 	public static ArrayList<String> recursivePermutes(ArrayList<Integer> eachSize, String current)
 	{
 		if(current.length() == 0)

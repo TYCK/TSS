@@ -3,6 +3,11 @@ package tss_GUI;
 import java.awt.Color;
 import java.awt.Font;
 
+/**
+ * A class that holds all the constant definitions for the GUI.
+ * @author Yerodin Richards
+ *
+ */
 public class GUIDefs
 {
 	final public static Color BACKDROP_COLOR = new Color(227, 229, 238);

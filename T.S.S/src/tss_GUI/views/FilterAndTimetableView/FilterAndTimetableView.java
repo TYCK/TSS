@@ -24,8 +24,17 @@ import tss_timetableProcessor.TimeSlot;
 import tss_timetableProcessor.Timetable;
 import tss_timetableProcessor.TimetableGenerator;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class FilterAndTimetableView extends JPanel
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TSSCore tssCore;
 	private JPanel topPanel;
 	private TimeTablePane timetablePanel;

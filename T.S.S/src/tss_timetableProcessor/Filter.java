@@ -1,5 +1,10 @@
 package tss_timetableProcessor;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class Filter
 {
 	private char filterType;

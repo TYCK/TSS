@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import tss_core.Course;
 
+/**
+ * 
+ * @author Yerodin Richards
+ *
+ */
 public class TimeSlot
 {
 	final public static int MONDAY = 0;

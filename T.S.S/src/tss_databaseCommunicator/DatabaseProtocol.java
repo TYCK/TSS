@@ -69,18 +69,11 @@ public class DatabaseProtocol
 		}
 	}
 
-	/**
-	 * Method to disconnect connection from php scripts
-	 */
 	public void disconnect()
 	{
 		connected = false;
 	}
 
-	/**
-	 * A method designed to identify if there is a valid connection to the php
-	 * scripts.
-	 */
 	public boolean isConnected()
 	{
 		return connected;
@@ -153,11 +146,6 @@ public class DatabaseProtocol
 		return returnArray;
 	}
 
-	/**
-	 * 
-	 * @param CRN
-	 * @return
-	 */
 	public Course getCourse(int CRN)
 	{
 		return null;

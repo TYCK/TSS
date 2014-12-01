@@ -12,8 +12,19 @@ import tss_GUI.views.SelectCourseView.SelectCourseView;
 import tss_databaseCommunicator.DatabaseProtocol;
 import tss_timetableProcessor.TimetableGenerator;
 
+/**
+ * This is the core class of the application. It provides the databaseProtocol to be used as well as the views and
+ * is the entry point for the application.
+ * @author Yerodin Richards
+ * 
+ */
 public class TSSCore extends JApplet
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//FOR TESTING ONLY
 	final static int ID = 620063216;
 	
