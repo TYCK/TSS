@@ -140,6 +140,7 @@ public class Timetable
 					g.setColor(GUIDefs.BOLD_TEXT_COLOR);
 					g.drawString(course.getCode()+"-"+course.getType(), i*170+40+3, 80*z+20+15);
 					g.drawString(course.getCRN()+" Class", i*170+40+3, 80*z+20+3+25);
+					g.drawString(course.getLocation(), i*170+40+3, 80*z+20+3+38);
 				}
 				else
 				{

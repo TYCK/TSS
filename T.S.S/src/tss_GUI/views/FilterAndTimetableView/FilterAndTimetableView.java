@@ -108,6 +108,8 @@ public class FilterAndTimetableView extends JPanel
 		
 		timetablePanel = new TimeTablePane(allPossible);
 		timetablePanel.setBackground(GUIDefs.BACKDROP_COLOR);
+		
+		JScrollPane scrollPane = new JScrollPane(timetablePanel);
 
 		registerButton = new JButton("Register Selected Timetable");
 		registerButton.setBackground(Color.white);
@@ -124,7 +126,7 @@ public class FilterAndTimetableView extends JPanel
 
 		this.setLayout(new BorderLayout());
 		this.add(topPanel, BorderLayout.NORTH);
-		this.add(timetablePanel, BorderLayout.CENTER);
+		this.add(scrollPane, BorderLayout.CENTER);
 		this.add(lowerButtonPanel, BorderLayout.SOUTH);
 		
 		addFilterButton.addActionListener(new ActionListener()

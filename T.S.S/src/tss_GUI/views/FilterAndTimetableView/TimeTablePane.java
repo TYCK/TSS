@@ -4,8 +4,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.File;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,6 +22,8 @@ public class TimeTablePane extends JPanel
 	private Image prevArrow, nextArrow;
 	public TimeTablePane(ArrayList<Timetable> timetables)
 	{
+		
+		
 		try
 		{
 			prevArrow = ImageIO.read(TSSCore.class.getClassLoader().getResourceAsStream("tss_GUI\\res\\scrollArrowl.png"));
@@ -72,12 +73,22 @@ public class TimeTablePane extends JPanel
 	
 	public void paint(Graphics g)
 	{
+		Image current = timetables[currentlySelected].generateImage();
+//		double ratio = (double)this.getHeight()/(double)currentL.getHeight(null);
+//		BufferedImage current = new BufferedImage(currentL.getWidth(this), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+//		Graphics tG = current.createGraphics();
+//		tG.drawImage(currentL, 0, 0, currentL.getWidth(this), this.getHeight(), null);
+//		tG.dispose();
+		
 		g.setColor(GUIDefs.BACKDROP_COLOR);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		Image current = timetables[currentlySelected].generateImage();
 		g.drawImage(current, (int) (.5F*this.getWidth()-.5*current.getWidth(this)), 0, this);
 		g.setColor(Color.BLUE);
 		g.drawRect((int) (.5F*this.getWidth()-.5*current.getWidth(this)), 0, current.getWidth(this), current.getHeight(this));
+		if(timetables[currentlySelected].hasClashes())
+			System.out.println("clashes");
+		else
+			System.out.println("no clashes");
 		if(currentlySelected-1 >= 0 )
 		{
 			Image previous = timetables[currentlySelected-1].generateImage();
@@ -90,7 +101,6 @@ public class TimeTablePane extends JPanel
 			g.drawImage(next, (int) (.5F*this.getWidth()-.5*current.getWidth(this))+current.getWidth(this)+20, 0, this);
 			g.drawImage(nextArrow, this.getWidth()-nextArrow.getWidth(this), (int) (.5F*this.getHeight()-.5F*nextArrow.getHeight(this)), this);
 		}
-
 	}
 
 
