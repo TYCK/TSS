@@ -1,28 +1,17 @@
 package tss_GUI.views.FilterAndTimetableView;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.BevelBorder;
-
 import tss_GUI.GUIDefs;
 import tss_core.Course;
 import tss_core.TSSCore;
 import tss_timetableProcessor.Filter;
-import tss_timetableProcessor.TimeSlot;
 import tss_timetableProcessor.Timetable;
 import tss_timetableProcessor.TimetableGenerator;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * 
@@ -50,7 +39,7 @@ public class FilterAndTimetableView extends JPanel
 
 
 	
-	public FilterAndTimetableView(TSSCore tssCore, ArrayList<Course> courses)
+	public FilterAndTimetableView(final TSSCore tssCore, ArrayList<Course> courses)
 	{
 		this.tssCore = tssCore;
 		this.tssCore.setLoading(true);
@@ -64,7 +53,7 @@ public class FilterAndTimetableView extends JPanel
 		}
 		ArrayList<Timetable> allPossible = TimetableGenerator.generateAllPossibleTimetables(coursesSelected);
 		
-		AddFilterDialog addDialog = new AddFilterDialog();
+		final AddFilterDialog addDialog = new AddFilterDialog();
 		backButton = new JButton("Back To Select Courses");
 		backButton.setPreferredSize(new Dimension(200, 100));
 		backButton.setBackground(Color.white);

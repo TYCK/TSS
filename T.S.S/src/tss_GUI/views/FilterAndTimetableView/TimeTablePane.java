@@ -1,19 +1,15 @@
 package tss_GUI.views.FilterAndTimetableView;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
 import tss_GUI.GUIDefs;
 import tss_core.TSSCore;
 import tss_timetableProcessor.Timetable;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * This class servers as the timetable gallery. It draws the timetables and allows the user to
@@ -31,7 +27,7 @@ public class TimeTablePane extends JPanel
 	private Timetable[] timetables;
 	private int currentlySelected;
 	private Image prevArrow, nextArrow;
-	public TimeTablePane(ArrayList<Timetable> timetables)
+	public TimeTablePane(final ArrayList<Timetable> timetables)
 	{
 		
 		

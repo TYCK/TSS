@@ -1,26 +1,15 @@
 package tss_GUI.views.SelectCourseView;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
 import tss_GUI.GUIDefs;
 import tss_GUI.views.FilterAndTimetableView.FilterAndTimetableView;
 import tss_core.Course;
 import tss_core.TSSCore;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * 
@@ -48,7 +37,7 @@ public class SelectCourseView extends JPanel
 
 	private JPanel searchPanel, resultPanel, registeredPanel;
 
-	public SelectCourseView(TSSCore tssCore, ArrayList<String> subjects, String[] levels,
+	public SelectCourseView(final TSSCore tssCore, ArrayList<String> subjects, String[] levels,
 			String[] campuses)
 	{
 		this.tssCore = tssCore;
