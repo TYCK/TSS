@@ -1,1 +1,5 @@
 /bin/
+*.iml
+*.idea
+*.settings
+*.classpath
