@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 /**
  * 
@@ -36,6 +38,7 @@ public class SelectCourseView extends JPanel
 	private JButton searchButton, addButton, removeButton, generateButton;
 
 	private JPanel searchPanel, resultPanel, registeredPanel;
+        private JFrame frame;
 
 	public SelectCourseView(final TSSCore tssCore, ArrayList<String> subjects, String[] levels,
 			String[] campuses)
@@ -165,11 +168,17 @@ public class SelectCourseView extends JPanel
 				ArrayList<Course> courses = new ArrayList<Course>();
 				if(registeredListModel.size() > 0)
 				{
-					for(int i = 0; i < registeredListModel.getSize(); ++i)
+					for(int i = 0; i < registeredListModel.getSize(); ++i){
 						courses.add(registeredListModel.get(i));
-					
+                                        }
+                                        tssCore.setContentPane(new FilterAndTimetableView(tssCore, courses));
 				}
-				tssCore.setContentPane(new FilterAndTimetableView(tssCore, courses));
+                                else if (registeredListModel.size() == 0){
+                                 frame = new JFrame("Gennerate timetable dialog");
+                                 JOptionPane.showMessageDialog(frame, "It is impossile to generate timetables with 0 selected courses", "Not Valid", JOptionPane.INFORMATION_MESSAGE);
+                                
+                                }
+				
 				tssCore.revalidate();
 				tssCore.repaint();
 			}
