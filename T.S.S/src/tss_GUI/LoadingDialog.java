@@ -1,12 +1,7 @@
 package tss_GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JWindow;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * 

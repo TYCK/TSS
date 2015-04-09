@@ -1,13 +1,11 @@
 package tss_timetableProcessor;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import tss_GUI.GUIDefs;
 import tss_core.Course;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * 
@@ -88,7 +86,7 @@ public class Timetable
 		return clashes;
 	}
 	
-	public Image generateImage()
+	public BufferedImage generateImage()
 	{
 		BufferedImage returnImage = new BufferedImage(40+170*6,20+80*(endHr-startHr),BufferedImage.TYPE_INT_RGB);
 		Graphics g = returnImage.getGraphics();

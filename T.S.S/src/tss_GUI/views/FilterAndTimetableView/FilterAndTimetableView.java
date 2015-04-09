@@ -1,4 +1,5 @@
 package tss_GUI.views.FilterAndTimetableView;
+
 import tss_GUI.GUIDefs;
 import tss_core.Course;
 import tss_core.TSSCore;
@@ -6,11 +7,14 @@ import tss_timetableProcessor.Filter;
 import tss_timetableProcessor.Timetable;
 import tss_timetableProcessor.TimetableGenerator;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -158,6 +162,24 @@ public class FilterAndTimetableView extends JPanel
 				tssCore.repaint();
 			}
 
+		});
+
+		downloadButton.addActionListener(new ActionListener()
+		{
+			@Override public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("JPEG Image","jpg","jpeg"));
+					fileChooser.setSelectedFile(new File("timetable.jpg"));
+					if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION)
+						ImageIO.write(timetablePanel.getCurrentlySelectedTimetable().generateImage(), "JPEG", fileChooser.getSelectedFile());
+				}catch (Exception ee)
+				{
+					JOptionPane.showMessageDialog(null, "Error creating timetable image.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		});
 		this.tssCore.setLoading(false);
 	}

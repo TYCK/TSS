@@ -33,8 +33,8 @@ public class TimeTablePane extends JPanel
 		
 		try
 		{
-			prevArrow = ImageIO.read(TSSCore.class.getClassLoader().getResourceAsStream("tss_GUI\\res\\scrollArrowl.png"));
-			nextArrow = ImageIO.read(TSSCore.class.getClassLoader().getResourceAsStream("tss_GUI\\res\\scrollArrowr.png"));
+			prevArrow = ImageIO.read(TSSCore.class.getClassLoader().getResourceAsStream("tss_GUI/res/scrollArrowl.png"));
+			nextArrow = ImageIO.read(TSSCore.class.getClassLoader().getResourceAsStream("tss_GUI/res/scrollArrowr.png"));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -108,6 +108,11 @@ public class TimeTablePane extends JPanel
 			g.drawImage(next, (int) (.5F*this.getWidth()-.5*current.getWidth(this))+current.getWidth(this)+20, 0, this);
 			g.drawImage(nextArrow, this.getWidth()-nextArrow.getWidth(this), (int) (.5F*this.getHeight()-.5F*nextArrow.getHeight(this)), this);
 		}
+	}
+
+	public Timetable getCurrentlySelectedTimetable()
+	{
+		return timetables[currentlySelected];
 	}
 
 
