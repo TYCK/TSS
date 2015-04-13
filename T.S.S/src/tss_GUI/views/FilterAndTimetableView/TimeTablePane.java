@@ -92,10 +92,6 @@ public class TimeTablePane extends JPanel
 		g.drawImage(current, (int) (.5F*this.getWidth()-.5*current.getWidth(this)), 0, this);
 		g.setColor(Color.BLUE);
 		g.drawRect((int) (.5F*this.getWidth()-.5*current.getWidth(this)), 0, current.getWidth(this), current.getHeight(this));
-		if(timetables[currentlySelected].hasClashes())
-			System.out.println("clashes");
-		else
-			System.out.println("no clashes");
 		if(currentlySelected-1 >= 0 )
 		{
 			Image previous = timetables[currentlySelected-1].generateImage();
