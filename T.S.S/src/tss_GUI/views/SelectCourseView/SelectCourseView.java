@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
 
 /**
  * 
@@ -24,8 +24,7 @@ public class SelectCourseView extends JPanel
 	 * 
 	 */
 	private static final long serialVersionUID = 6293736574643564977L;
-	private JLabel subjectLabel, courseNumLabel, titleLabel, campusLabel, courseLevelLabel,
-			resultsLabel, selectedLabel;
+	private JLabel subjectLabel, courseNumLabel, titleLabel, campusLabel, courseLevelLabel,	resultsLabel, selectedLabel;
 	private JTextField courseNumField, titleField;
 	private JList<String> subjectList, campusList, levelList;
 	private DefaultListModel<Course> resultsListModel, registeredListModel;
@@ -116,11 +115,12 @@ public class SelectCourseView extends JPanel
 
 		resultPanel = new JPanel();
 		resultPanel.setLayout(new BoxLayout(resultPanel, BoxLayout.Y_AXIS));
-		resultPanel.setPreferredSize(new Dimension(350, 720));
-		resultPanel.setMaximumSize(new Dimension(350, 720));
+//		resultPanel.setPreferredSize(new Dimension(350, 720));
+//		resultPanel.setMaximumSize(new Dimension(350, 720));
 		resultsLabel = new JLabel("Search Results");
 		resultsLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		resultsLabel.setFont(GUIDefs.BASE_HEADING_FONT);
+		resultsLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		resultsListModel = new DefaultListModel<Course>();
 		resultsList = new JList<Course>(resultsListModel);
 		resultsList.setCellRenderer(new CourseCellRenderer());
@@ -138,10 +138,11 @@ public class SelectCourseView extends JPanel
 
 		registeredPanel = new JPanel();
 		registeredPanel.setLayout(new BoxLayout(registeredPanel, BoxLayout.Y_AXIS));
-		registeredPanel.setPreferredSize(new Dimension(350, 720));
+//		registeredPanel.setPreferredSize(new Dimension(350, 720));
 		selectedLabel = new JLabel("Selected Courses:");
 		selectedLabel.setForeground(GUIDefs.BOLD_TEXT_COLOR);
 		selectedLabel.setFont(GUIDefs.BASE_HEADING_FONT);
+		selectedLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		registeredListModel = new DefaultListModel<Course>();
 		registeredList = new JList<Course>(registeredListModel);
 		registeredList.setForeground(GUIDefs.COMMON_TEXT_COLOR);
@@ -187,8 +188,7 @@ public class SelectCourseView extends JPanel
 
 		searchButton.addActionListener(new ActionListener()
 		{
-			@Override
-			public void actionPerformed(ActionEvent e)
+			@Override public void actionPerformed(ActionEvent e)
 			{
 				tssCore.setLoading(true);
 				if (!subjectList.isSelectionEmpty())
@@ -201,9 +201,8 @@ public class SelectCourseView extends JPanel
 					String code = courseNumField.getText();
 					if (code.equalsIgnoreCase(""))
 						code = null;
-					ArrayList<Course> courses = tssCore.getDatabaseProtocol().searchCourse(
-							new Course(-1, title, null, subjectList.getSelectedIndex(), code, null,
-									-1, null, null));
+					ArrayList<Course> courses = tssCore.getDatabaseProtocol()
+							.searchCourse(new Course(-1, title, null, subjectList.getSelectedIndex(), code, null, -1, null, null));
 					if (courses != null)
 					{
 						for (int i = 0; i < courses.size(); ++i)
@@ -213,8 +212,7 @@ public class SelectCourseView extends JPanel
 							for (int j = 0; j < resultsListModel.size(); ++j)
 							{
 								Course compare = resultsListModel.get(j);
-								if (c.getCode().equalsIgnoreCase(compare.getCode())
-										&& c.getType().charAt(0) == compare.getType().charAt(0))
+								if (c.getCode().equalsIgnoreCase(compare.getCode()) && c.getType().charAt(0) == compare.getType().charAt(0))
 									has = true;
 							}
 							if (!has)
@@ -251,9 +249,16 @@ public class SelectCourseView extends JPanel
 			}
 
 		});
+		JPanel rightPanel = new JPanel();
+		rightPanel.setLayout(new GridLayout(1,2));
+		rightPanel.add(resultPanel);
+		rightPanel.add(registeredPanel);
+
 		this.add(searchPanel, BorderLayout.WEST);
-		this.add(resultPanel, BorderLayout.CENTER);
-		this.add(registeredPanel, BorderLayout.EAST);
+		this.add(rightPanel, BorderLayout.CENTER);
 		this.add(generateButton, BorderLayout.SOUTH);
 	}
+
+
+
 }
