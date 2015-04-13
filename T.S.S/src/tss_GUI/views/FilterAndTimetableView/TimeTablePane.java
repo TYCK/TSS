@@ -86,7 +86,7 @@ public class TimeTablePane extends JPanel
 //		Graphics tG = current.createGraphics();
 //		tG.drawImage(currentL, 0, 0, currentL.getWidth(this), this.getHeight(), null);
 //		tG.dispose();
-		
+		setPreferredSize(new Dimension(current.getWidth(this),current.getHeight(this)));
 		g.setColor(GUIDefs.BACKDROP_COLOR);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		g.drawImage(current, (int) (.5F*this.getWidth()-.5*current.getWidth(this)), 0, this);
